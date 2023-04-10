@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net462</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MsieJavaScriptEngine" Version="3.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources/es6-polyfills.js" />
+  </ItemGroup>
+
+  <Target Name="EnsureJsFilesBuilded" BeforeTargets="BeforeBuild">
+    <Error
+      Condition=" !Exists('./Resources/es6-polyfills.js') "
+      Text="You need to build JS files. To do this, run a `build-js.cmd` script." />
+  </Target>
+
+</Project>
